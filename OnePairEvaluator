@@ -1,0 +1,114 @@
+
+package hw4;
+
+import java.util.Arrays;
+
+import api.Card;
+import api.Hand;
+import api.IEvaluator;
+
+/**
+ * Evaluator for a hand containing (at least) two cards of the same rank.
+ * The number of cards required is two.
+ * 
+ * The name of this evaluator is "One Pair".
+ */
+//Note: You must edit this declaration to extend AbstractEvaluator
+//or to extend some other class that extends AbstractEvaluator
+public class OnePairEvaluator extends AbstractEvaluator implements IEvaluator
+{
+	
+	private String name;
+	private int ranking;
+	private int handSize;
+	private int cardsRequired;
+  /**
+   * Constructs the evaluator.
+   * @param ranking
+   *   ranking of this hand
+   * @param handSize
+   *   number of cards in a hand
+   */
+  public OnePairEvaluator(int ranking, int handSize)
+  {
+    // TODO: call appropriate superclass constructor and 
+    // perform other initialization
+	  super();
+//	  OnePairEvaluator newEvaluator = new OnePairEvaluator(ranking, handSize);
+	  this.name = "One Pair";
+	  this.ranking = ranking;
+	  this.handSize = handSize;
+	  this.cardsRequired = 2;
+  }
+
+@Override
+public String getName() {
+	// TODO Auto-generated method stub
+	return name;
+}
+
+@Override
+public int getRanking() {
+	// TODO Auto-generated method stub
+	return ranking;
+}
+
+@Override
+public int cardsRequired() {
+	// TODO Auto-generated method stub
+	return cardsRequired;
+}
+
+@Override
+public int handSize() {
+	// TODO Auto-generated method stub
+	return handSize;
+}
+
+@Override
+public boolean canSatisfy(Card[] mainCards) {
+	for (int i=0; i<mainCards.length; i++) {
+		mainCards[i].compareTo(mainCards[i]);
+	}
+	if (mainCards.length >= cardsRequired()) {
+		return true;
+	}
+	return false;
+}
+
+@Override
+public boolean canSubsetSatisfy(Card[] allCards) {
+	
+	if (allCards.length >= cardsRequired()) {
+		return true;
+	}
+	return false;
+}
+/*
+ * make new hand
+ * check if mainCards match required cards
+ * check if array in order *make in order?
+ * Number of side cards must add to main to make total size of hand specified
+ * side cards ordered by compare to
+ */
+@Override
+public Hand createHand(Card[] allCards, int[] subset) {
+	if (subset.length == cardsRequired) {
+		Card[] mainCards = new Card[cardsRequired];
+		Card[] sideCards = new Card[handSize - cardsRequired];
+		for (int i=0; i<handSize; i++) {
+			for (int b=0; b<subset.length; b++)
+			mainCards[i] = allCards[i];
+			Arrays.sort(allCards);
+		}
+	}		
+	
+	return null;
+}
+
+@Override
+public Hand getBestHand(Card[] allCards) {
+	// TODO Auto-generated method stub
+	return null;
+}
+}
